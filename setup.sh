@@ -11,12 +11,27 @@ userpath = os.path.expanduser('~')
 def inpt(type, msg):
   return type(input(msg))
 
+def dec(text):
+    deco = "~"*(len(text) if len(text) < 60 else 60)
+    print(deco)
+    print(text)
+    print(deco)
+
+
 def mkdir(path):
   if not os.path.exists(path):
     os.mkdir(path)
 
-print("Welcome to the setup script!")
-print("Please provide the following info about your android/ios device:")
+print("This script was made by")
+print('''
+ _   _             ____
+| | | | __ ___  __/ ___|_   _ _ __ _   _
+| |_| |/ _` \ \/ | |  _| | | | '__| | | |
+|  _  | (_| |>  <| |_| | |_| | |  | |_| |
+|_| |_|\__,_/_/\_\\____|\__,_|_|   \__,_|
+
+''')
+dec("Please provide the following info about your android device:")
 
 # getting details
 width = inpt(int, "Display Width: ")
@@ -27,7 +42,7 @@ while True:
   password = input("Enter a password that you can remember for your vnc: ")
   confirm_pass = input("Confirm password: ")
   if password != confirm_pass:
-    print("Passwords don't match!")
+    dec("ERROR: Passwords don't match!")
   else:
     break
 
@@ -50,7 +65,7 @@ print("Creating new display mode...")
 try:
     output = os.popen('xrandr').read().partition("disconnected")[0].splitlines()[1]
 except:
-    print("It seems like your PC doesn't have a spare display port :/\n Sorry but it won't work on your PC :(")
+    dec("It seems like your PC doesn't have a spare display port :/\n Sorry but it won't work on your PC :(")
 else:
     print("Creating the new script..")
 
@@ -75,4 +90,4 @@ data = ['[Desktop Entry]', 'Encoding=UTF-8', 'Version=1.0', 'Type=Application', 
 with open(f'{userpath}/.local/share/applications/startvnc.desktop', 'w') as x:
     x.write('\n'.join(data))
 
-print("SUCCESS! YOU CAN NOW RUN THE PROGRAM NAMED \"Start VNC\" to start the vnc server!")
+dec("SUCCESS! You can now run the program named \"Start VNC\" to start the vnc server! Please note that you have to connect your android device and enable usb-debugging before continuing... Make sure that both the devices are connected to the same network! Please enable USB-Tethering for faster performance...")
