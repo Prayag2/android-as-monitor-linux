@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# This script will let you use your android device as a second monitor by creating a vnc server! It is user friendly and easy to use! Please report if you face any bugs/issues!
 # This script was created by HaxGuru.
 
 # Modules
@@ -61,9 +62,9 @@ os.system(f"x11vnc -storepasswd {password} ~/.vnc/passwd")
 # creating new mode for xrandr
 print("Creating new display mode...")
 
-# os.system(f'xrandr --newmode {modeline}')
+os.system(f'xrandr --newmode {modeline}')
 try:
-    output = os.popen('xrandr').read().partition("disconnected")[0].splitlines()[1]
+    output = os.popen('xrandr').read().partition("disconnected")[0].splitlines()[-1]
 except:
     dec("It seems like your PC doesn't have a spare display port :/\n Sorry but it won't work on your PC :(")
 else:
@@ -84,10 +85,14 @@ with open(f"{userpath}/.haxguru/startvnc.sh", 'w') as x:
 del positions
 
 # .desktop data
-data = ['[Desktop Entry]', 'Encoding=UTF-8', 'Version=1.0', 'Type=Application', 'Terminal=true', f'Exec={userpath}/.haxguru/startvnc.sh > /dev/null 2>&1 &', 'Name=Start VNC', 'Icon=cs-screen']
+data = ['[Desktop Entry]', 'Encoding=UTF-8', 'Version=1.0', 'Type=Application', 'Terminal=true', f'Exec={userpath}/.haxguru/startvnc.sh', 'Name=Start VNC', 'Icon=cs-screen']
 
 # creating .desktop file
 with open(f'{userpath}/.local/share/applications/startvnc.desktop', 'w') as x:
     x.write('\n'.join(data))
+
+# making startvnc.sh executableatom
+print("Please enter your root password to make the script executable...")
+os.system(f'sudo chmod +x {userpath}/.haxguru/startvnc.sh')
 
 dec("SUCCESS! You can now run the program named \"Start VNC\" to start the vnc server! Please note that you have to connect your android device and enable usb-debugging before continuing... Make sure that both the devices are connected to the same network! Please enable USB-Tethering for faster performance...")
