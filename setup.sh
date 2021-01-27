@@ -4,6 +4,9 @@
 # Modules
 import os, subprocess
 
+# Global Variables
+userpath = os.path.expanduser('~')
+
 # Functions
 def inpt(type, msg):
   return type(input(msg))
@@ -19,24 +22,22 @@ print("Please provide the following info about your android/ios device:")
 width = inpt(int, "Display Width: ")
 height = inpt(int, "Display Height: ")
 refresh_rate = inpt(int, "Refresh Rate: ")
-print("CREATE A PASSWORD")
+position = inpt(int, "Choose the position of your new monitor (0 for right, 1 for left, 2 for bottom, 3 for top): ")
 while True:
-  pass = input("Enter a password that you can remember for your vnc: ")
+  password = input("Enter a password that you can remember for your vnc: ")
   confirm_pass = input("Confirm password: ")
-  if pass != confirm_pass:
+  if password != confirm_pass:
     print("Passwords don't match!")
   else:
     break
 
-mkdir('./temp')
-
-os.system(f'cvt {width} {height} {refresh_rate} > temp/modeline.txt')
-with open('./temp/modeline.txt') as x:
-  modeline = x.read().split('Modeline')[1][1::]
+modeline = os.popen(f'cvt {width} {height} {refresh_rate}').read().split('Modeline')[1][1::]
+resolution = modeline.split('"')[1]
+current_output = os.popen("xrandr --listmonitors").read().split(' ')[-1].splitlines()[0]
 
 # running commands
 print("Creating folder 'vnc'..")
-mkdir('~/.vnc')
+mkdir(f'{userpath}/.vnc')
 
 # saving password
 print("Saving your password...")
@@ -44,4 +45,34 @@ os.system(f"x11vnc -storepasswd {password} ~/.vnc/passwd")
 
 # creating new mode for xrandr
 print("Creating new display mode...")
-os.system(f'xrandr --newmode {modeline}')
+
+# os.system(f'xrandr --newmode {modeline}')
+try:
+    output = os.popen('xrandr').read().partition("disconnected")[0].splitlines()[1]
+except:
+    print("It seems like your PC doesn't have a spare display port :/\n Sorry but it won't work on your PC :(")
+else:
+    print("Creating the new script..")
+
+# startvnc commands
+positions = ['--right-of', '--left-of', '--below', '--top']
+scriptcommands = [f"xrandr --addmode {output} {resolution}", f"xrandr --output {output} --mode {resolution} {positions[position]} {current_output}", "adb reverse tcp:5900 tcp:5900", "x11vnc -rfbauth ~/.vnc/passwd", ]
+
+joined = '\n'.join(scriptcommands)
+
+# creating startvnc.sh
+mkdir(f"{userpath}/.haxguru")
+with open(f"{userpath}/.haxguru/startvnc.sh", 'w') as x:
+  x.write(f"#!/bin/bash\n{joined}")
+
+# deleting variables from memory
+del positions
+
+# .desktop data
+data = ['[Desktop Entry]', 'Encoding=UTF-8', 'Version=1.0', 'Type=Application', 'Terminal=true', f'Exec={userpath}/.haxguru/startvnc.sh > /dev/null 2>&1 &', 'Name=Start VNC', 'Icon=cs-screen']
+
+# creating .desktop file
+with open(f'{userpath}/.local/share/applications/startvnc.desktop', 'w') as x:
+    x.write('\n'.join(data))
+
+print("SUCCESS! YOU CAN NOW RUN THE PROGRAM NAMED \"Start VNC\" to start the vnc server!")
