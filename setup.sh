@@ -87,7 +87,7 @@ f"xrandr --addmode {output} {resolution}",
 f"xrandr --output {output} --mode {resolution} {positions[position]} {current_output}",
 "adb reverse tcp:5900 tcp:5900",
 f"notify-send \"Please enter the following details in your VNC app-    1) IP Address: {ip}    2) VNC Password: {confirm_pass}    3) Port (optional): 5900    Also, please run \"Close VNC\" to close the vnc!\"",
-"x11vnc -rfbauth ~/.vnc/passwd -ncache",
+"x11vnc -rfbauth ~/.vnc/passwd",
 "echo *************************************************",
 "echo Please run the program \"Close VNC\" to close the vnc!",
 "echo *************************************************"
