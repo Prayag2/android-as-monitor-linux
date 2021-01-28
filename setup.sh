@@ -29,7 +29,7 @@ def mkdir(path):
 
 
 print("This script was made by")
-print('''
+print(r'''
  _   _             ____
 | | | | __ ___  __/ ___|_   _ _ __ _   _
 | |_| |/ _` \ \/ | |  _| | | | '__| | | |
