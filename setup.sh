@@ -78,7 +78,7 @@ except:
     dec("Something went wrong :(")
 
 # startvnc commands
-ip = os.popen("ifconfig | grep inet | grep broadcast | awk '{print $2}'").read().replace('\n', '').replace(' ', '')
+ip = os.popen("ifconfig | grep inet | grep broadcast | awk '{print $2}'").read().splitlines()[0]
 positions = ['--right-of', '--left-of', '--below', '--top']
 scriptcommands = [
 "#!/bin/bash",
