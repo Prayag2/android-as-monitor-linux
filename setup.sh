@@ -14,11 +14,13 @@ userpath = os.path.expanduser('~')
 def inpt(type, msg):
   return type(input(msg))
 
-def dec(text):
+def dec(text, top=True, bottom=True):
     deco = "~"*(len(text) if len(text) < 60 else 60)
-    print(deco)
+    if top:
+        print(deco)
     print(text)
-    print(deco)
+    if bottom:
+        print(deco)
 
 
 def mkdir(path):
@@ -76,6 +78,7 @@ except:
     dec("Something went wrong :(")
 
 # startvnc commands
+ip = os.popen("ifconfig | grep inet | grep broadcast | awk '{print $2}'").read().replace('\n', '').replace(' ', '')
 positions = ['--right-of', '--left-of', '--below', '--top']
 scriptcommands = [
 "#!/bin/bash",
@@ -83,7 +86,8 @@ f'xrandr --newmode {modeline}',
 f"xrandr --addmode {output} {resolution}",
 f"xrandr --output {output} --mode {resolution} {positions[position]} {current_output}",
 "adb reverse tcp:5900 tcp:5900",
-"x11vnc -rfbauth ~/.vnc/passwd",
+f"notify-send \"Please enter the following details in your VNC app-    1) IP Address: {ip}    2) VNC Password: {confirm_pass}    3) Port (optional): 5900    Also, please run \"Close VNC\" to close the vnc!\"",
+"x11vnc -rfbauth ~/.vnc/passwd -ncache -ncache_r",
 "echo *************************************************",
 "echo Please run the program \"Close VNC\" to close the vnc!",
 "echo *************************************************"
@@ -137,3 +141,4 @@ os.system(f'sudo chmod +x {userpath}/.haxguru/startvnc.sh {userpath}/.haxguru/cl
 
 # Success Message
 dec("SUCCESS! You can now run the program named \"Start VNC\" to start the vnc server! Please note that you have to connect your android device and enable usb-debugging before continuing... Make sure that both the devices are connected to the same network! Please enable USB-Tethering for faster performance... You can stop the vnc by running the program \"Close VNC\"! Please check out your YouTube channel- http://bit.ly/hxyoutube/")
+dec(f"Please enter the following details in your VNC app- \n1) IP Address: {ip}\n2) VNC Password: {confirm_pass}\n3) Port (optional): 5900", top=False)
