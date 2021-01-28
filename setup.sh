@@ -106,9 +106,7 @@ f'xrandr --output {output} --off'
 ]
 
 with open(f"{userpath}/.haxguru/closevnc.sh", 'w') as x:
-    x.write('\n'.join(closevnc_commands))
-
-# deleting variables from memory
+    x.write('\n'.join(closevnc_commands)) # deleting variables from memory
 del positions, modeline, output, resolution, current_output, position, closevnc_commands
 
 # .desktop data
