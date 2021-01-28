@@ -16,6 +16,7 @@ Clone the repository in your Downloads folder:
 `git clone https://github.com/Prayag2/android-as-monitor-linux.git ~/Downloads/android-as-monitor-linux`  
   
 # Run the script  
+`cd ~/Downloads/android-as-monitor-linux`    
 `sudo chmod +x ./setup.sh; ./setup.sh`    
 
 # Uninstall
