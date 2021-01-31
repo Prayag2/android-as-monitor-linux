@@ -4,8 +4,8 @@ This script creates a vnc server with the information of your android device's r
   
 # Dependecies  
 ### Please install the following depencencies before running the program 👇  
-Ubuntu- `sudo apt update; sudo apt install x11vnc adb notify-send`  
-Manjaro- `sudo pacman -S x11vnc adb`  
+Ubuntu- `sudo apt update; sudo apt install x11vnc adb notify-send net-tools`  
+Manjaro- `sudo pacman -S x11vnc adb net-tools`  
 #### Please visit these links for other distros-  
 x11vnc- https://pkgs.org/search/?q=x11vnc  
 adb- https://pkgs.org/search/?q=adb&on=files  
