@@ -80,14 +80,16 @@ except:
 # startvnc commands
 ip = os.popen("ifconfig | grep inet | grep broadcast | awk '{print $2}'").read().splitlines()[0]
 positions = ['--right-of', '--left-of', '--below', '--top']
+current_width = os.popen("xrandr | grep ' connected ' | awk '{print $3}'").read().split('+')[0].split('x')[0]
 scriptcommands = [
 "#!/bin/bash",
 f'xrandr --newmode {modeline}',
 f"xrandr --addmode {output} {resolution}",
 f"xrandr --output {output} --mode {resolution} {positions[position]} {current_output}",
 "adb reverse tcp:5900 tcp:5900",
+""
 f"notify-send \"Please enter the following details in your VNC app-    1) IP Address: {ip}    2) VNC Password: {confirm_pass}    3) Port (optional): 5900    Also, please run \"Close VNC\" to close the vnc!\"",
-"x11vnc -rfbauth ~/.vnc/passwd",
+f"x11vnc -rfbauth ~/.vnc/passwd -clip {width}x{height}+{current_width}+0",
 "echo *************************************************",
 "echo Please run the program \"Close VNC\" to close the vnc!",
 "echo *************************************************"
