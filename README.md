@@ -4,12 +4,13 @@ This script creates a vnc server with the information of your android device's r
   
 # Dependecies  
 ### Please install the following depencencies before running the program 👇  
-Ubuntu- `sudo apt update; sudo apt install x11vnc adb notify-send net-tools`  
-Manjaro- `sudo pacman -S x11vnc adb net-tools`  
+Ubuntu/Debian/Mint- `sudo apt update; sudo apt install x11vnc android-tools libnotify-4 net-tools`
+Manjaro/Arch- `sudo pacman -S x11vnc android-tools net-tools libnotify`
+
 #### Please visit these links for other distros-  
-x11vnc- https://pkgs.org/search/?q=x11vnc  
-adb- https://pkgs.org/search/?q=adb&on=files  
-notify-send- https://pkgs.org/search/?q=notify-send  
+x11vnc: https://pkgs.org/download/x11vnc
+android-tools: https://pkgs.org/download/android-tools
+libnotify4: https://pkgs.org/download/libnotify-bin
 
 # Download
 Clone the repository in your Downloads folder:  
@@ -28,9 +29,11 @@ Steps:
 - Connect your Android device and enable USB-Debugging (enable usb-tethering for faster performance).
 - Run "Start VNC" from your application menu to start the vnc.
 - Enter details in the VNC app in your android such as your ip address, port and password (details will be provided by a notification).
-- Zoom in so that you are only able to see the second desktop (the black screen).
+- Change the "scaling" to "One to One"
 - You can move windows to your secondary monitor (android) with the help of your mouse.
 - Enjoy!
+
+Note: If you want to use another device, then uninstall the script first and then install it again.
 
 Thanks for using this script! I know the code is quite bad because a lot of lines are repeated and I know I could've done this with bash instead of python but I don't know much about bash and my exams are near so I used Python because I already knew a lot about it! Thanks again!
 Please visit my YouTube channel: http://bit.ly/hxyoutube
