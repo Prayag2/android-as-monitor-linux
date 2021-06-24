@@ -75,16 +75,14 @@ print("Saving your password...")
 os.system(f"x11vnc -storepasswd {password} ~/.vnc/passwd")
 
 # startvnc commands
-ip = os.popen("ifconfig | grep inet | grep broadcast | awk '{print $2}'").read().split()[0]
 positions = ['--right-of', '--left-of', '--below', '--top']
-#current_width = os.popen("xrandr | grep \* | awk '{print $1}' | cut -d 'x' -f 1").read().split()[0]
 scriptcommands = [
 "#!/bin/bash",
 f'xrandr --newmode {modeline}',
 f"xrandr --addmode {output} {resolution}",
 f"xrandr --output {output} --mode {resolution} {positions[position]} {current_output}",
 "adb reverse tcp:5900 tcp:5900",
-f"notify-send --app-name=\"Use Android as Monitor\" \"Details For VNC\" \"1) IP Address: {ip}\\n2) VNC Password: {confirm_pass}\\n3) Port (optional): 5900\\n Please run 'Close VNC' to turn the monitor off.\"",
+f"notify-send --app-name=\"Use Android as Monitor\" \"Details For VNC\" \"1) IP Address: `ifconfig | grep inet | grep broadcast | awk 'NR==1{{print $2}}' | tr -d \\n`\\n2) VNC Password: {confirm_pass}\\n3) Port (optional): 5900\\n Please run 'Close VNC' to turn the monitor off.\"",
 f"x11vnc -rfbauth ~/.vnc/passwd -clip xinerama1"
 ]
 
@@ -136,4 +134,3 @@ os.system(f'sudo chmod +x {userpath}/.haxguru/startvnc.sh {userpath}/.haxguru/cl
 
 # Success Message
 dec("SUCCESS! You can now run the program named \"Start VNC\" to start the vnc server! Please note that you have to connect your android device and enable usb-debugging before continuing... Make sure that both the devices are connected to the same network! Please enable USB-Tethering for faster performance... You can stop the vnc by running the program \"Close VNC\"! Please check out our YouTube channel- http://bit.ly/hxyoutube/")
-dec(f"Please enter the following details in your VNC app- \n1) IP Address: {ip}\n2) VNC Password: {confirm_pass}\n3) Port (optional): 5900", top=False)
