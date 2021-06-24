@@ -8,10 +8,10 @@ Ubuntu/Debian/Mint- `sudo apt update; sudo apt install x11vnc android-tools libn
 Manjaro/Arch- `sudo pacman -S x11vnc android-tools net-tools libnotify`
 
 #### Please visit these links for other distros-  
-x11vnc: https://pkgs.org/download/x11vnc
-android-tools: https://pkgs.org/download/android-tools
-libnotify-bin: https://pkgs.org/download/libnotify-bin
-net-tools: https://pkgs.org/download/net-tools
+x11vnc: https://pkgs.org/download/x11vnc  
+android-tools: https://pkgs.org/download/android-tools  
+libnotify-bin: https://pkgs.org/download/libnotify-bin  
+net-tools: https://pkgs.org/download/net-tools  
 
 # Download
 Clone the repository in your Downloads folder:  
