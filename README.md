@@ -4,7 +4,7 @@ This script creates a vnc server with the information of your android device's r
   
 # Dependecies  
 ### Please install the following depencencies before running the program 👇  
-Ubuntu/Debian/Mint- `sudo apt update; sudo apt install x11vnc android-tools libnotify-bin net-tools`
+Ubuntu/Debian/Mint- `sudo apt update; sudo apt install x11vnc android-tools libnotify-bin net-tools`  
 Manjaro/Arch- `sudo pacman -S x11vnc android-tools net-tools libnotify`
 
 #### Please visit these links for other distros-  
