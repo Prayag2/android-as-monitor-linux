@@ -11,6 +11,7 @@ Manjaro/Arch- `sudo pacman -S x11vnc android-tools net-tools libnotify`
 x11vnc: https://pkgs.org/download/x11vnc
 android-tools: https://pkgs.org/download/android-tools
 libnotify-bin: https://pkgs.org/download/libnotify-bin
+net-tools: https://pkgs.org/download/net-tools
 
 # Download
 Clone the repository in your Downloads folder:  
